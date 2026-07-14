@@ -17,7 +17,7 @@ function getPalaceHash(chart: ZiweiChart): string {
     chart: chart,
     palaces: chart.palaces.map(p => ({
       name: p.name,
-      stars: (p.majorStars || []).map(s => s.name),
+      stars: (p.stars || []).map(s => s.name),
     })),
   };
   // 简单的字符串哈希（链上存储用）
