@@ -180,7 +180,7 @@ export default function DestinyNFTMinter({
       if (e.code === "ACTION_REJECTED" || e.code === 4001) {
         setMessage("用户取消了交易");
       } else if (e.message?.includes("AlreadyMinted")) {
-        setMessage("您已经铸造过命盘了，每人只能铸造一次");
+        setMessage("您已经铸造过命盘了");
       } else {
         setMessage(e.reason || e.message || "铸造失败");
       }
@@ -255,7 +255,7 @@ export default function DestinyNFTMinter({
       {/* 信息提示 */}
       <div className="mt-4 pt-3 border-t border-border text-xs text-muted-foreground space-y-1">
         <p>⚡ 基于 Monad 区块链 (Testnet) · Soulbound 不可转移</p>
-        <p>💎 每人仅限铸造一次 · 可随时销毁</p>
+        <p>💎 一个地址可铸造多个命盘 · 可随时销毁</p>
         <p>🛡️ 命盘数据经哈希后上链，永久存证</p>
       </div>
     </div>
