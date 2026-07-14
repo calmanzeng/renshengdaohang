@@ -17,13 +17,13 @@ const CONTRACT_ABI = [
   "event DestinyMinted(uint256 indexed tokenId, address indexed owner, uint16 birthYear, uint8 birthMonth, uint8 birthDay, uint8 birthHour, uint8 gender, string palaceHash)",
 ];
 
-// Monad Testnet 配置
-const MONAD_TESTNET = {
-  chainId: "0x279F", // 10143
-  chainName: "Monad Testnet",
+// Monad Mainnet 配置
+const MONAD_MAINNET = {
+  chainId: "0x8F", // 143
+  chainName: "Monad",
   nativeCurrency: { name: "MON", symbol: "MON", decimals: 18 },
-  rpcUrls: ["https://testnet-rpc.monad.xyz"],
-  blockExplorerUrls: ["https://testnet.monadexplorer.com"],
+  rpcUrls: ["https://rpc.monad.xyz"],
+  blockExplorerUrls: ["https://monadvision.com"],
 };
 
 interface DestinyNFTProps {
@@ -109,7 +109,7 @@ export default function DestinyNFTMinter({
       
       // 检查是否在 Monad Testnet
       const network = await provider.getNetwork();
-      if (Number(network.chainId) !== 10143) {
+      if (Number(network.chainId) !== 143) {
         await switchToMonad();
       }
       
@@ -127,11 +127,11 @@ export default function DestinyNFTMinter({
   const switchToMonad = async () => {
     try {
       setStatus("switch-chain");
-      await provider!.send("wallet_switchEthereumChain", [{ chainId: MONAD_TESTNET.chainId }]);
+      await provider!.send("wallet_switchEthereumChain", [{ chainId: MONAD_MAINNET.chainId }]);
     } catch (e: any) {
       // 如果链不存在，尝试添加
       if (e.code === 4902) {
-        await provider!.send("wallet_addEthereumChain", [MONAD_TESTNET]);
+        await provider!.send("wallet_addEthereumChain", [MONAD_MAINNET]);
       } else {
         throw e;
       }
@@ -149,7 +149,7 @@ export default function DestinyNFTMinter({
       
       // 确保在 Monad Testnet
       const network = await provider.getNetwork();
-      if (Number(network.chainId) !== 10143) {
+      if (Number(network.chainId) !== 143) {
         await switchToMonad();
       }
       
@@ -215,7 +215,7 @@ export default function DestinyNFTMinter({
             <p className="text-green-700 font-medium">✅ 您的命盘已上链存证</p>
             <p className="text-sm text-green-600 mt-1">Token ID: #{tokenId}</p>
             <a
-              href={`https://testnet.monadexplorer.com/token/${contractAddress}?a=${tokenId}`}
+              href={`https://monadvision.com/token/${contractAddress}?a=${tokenId}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-blue-600 hover:underline mt-1 inline-block"
