@@ -1,6 +1,6 @@
 {
-  "network": "monad-testnet",
-  "chainId": 10143,
+  "network": "monad",
+  "chainId": 143,
   "address": "0x11A5c951C64E01297c2cE5854E282c1aE208f921",
   "name": "DestinySBT",
   "symbol": "DESTINY",
