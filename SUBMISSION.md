@@ -13,7 +13,7 @@ Ziwei Destiny SBT — 紫微命盘区块链存证
 用户排盘后，将出生年/月/日/时辰/命盘指纹哈希上链铸造为 Soulbound NFT，不可转移、不可篡改、每人仅限一次。
 
 ## 技术创新
-- Monad Testnet (10143) 存证
+- Monad Mainnet (143) 存证
 - Soulbound ERC-721 变体: 禁止所有转移操作
 - On-chain Base64 metadata
 - 合约仅 8.9KB，Gas 优化
