@@ -83,7 +83,7 @@ export default function DestinyNFTMinter({
       const p = new ethers.BrowserProvider((window as any).ethereum);
       setProvider(p);
       // 检查是否已连接
-      p.listAccounts().then((accounts) => {
+      p.send("eth_requestAccounts", []).then((accounts: string[]) => {
         if (accounts.length > 0) {
           setAccount(accounts[0]);
           if (contractAddress) {
