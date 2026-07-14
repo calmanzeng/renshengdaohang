@@ -44,7 +44,7 @@ contract DestinySBT {
     // Token ID => 拥有者
     mapping(uint256 => address) private _owners;
     // 地址 => Token ID (每个地址最多一个)
-    mapping(address => uint256) private _balances;
+    mapping(address => uint256) private _balances; // 地址命盘数量
     // Token ID => 命盘信息
     mapping(uint256 => DestinyInfo) private _destinies;
 
@@ -115,6 +115,7 @@ contract DestinySBT {
     }
 
     function getTokenId(address user) external view returns (uint256) {
+        // 返回用户拥有命盘的数量
         return _balances[user];
     }
 
@@ -138,8 +139,8 @@ contract DestinySBT {
         uint8 gender,
         string calldata palaceHash
     ) external returns (uint256) {
-        // 每人只能铸造一次
-        if (_balances[msg.sender] > 0) revert AlreadyMinted();
+        // 同一地址可铸造多个命盘
+        // (已移除单次限制)
         
         // 基本数据校验
         if (birthYear < 1900 || birthYear > 2100) revert InvalidBirthData();
@@ -153,7 +154,7 @@ contract DestinySBT {
         _nextTokenId++;
 
         _owners[tokenId] = msg.sender;
-        _balances[msg.sender] = tokenId;
+        _balances[msg.sender] += 1;
         _totalSupply++;
 
         _destinies[tokenId] = DestinyInfo({
